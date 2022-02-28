@@ -15,55 +15,59 @@ osascript -e 'tell application "System Preferences" to quit'
 # sudo scutil --set LocalHostName "kwakes-macbook-pro"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "Kwakes' Macbook Pro"
 
-get_consent "Create Dock spacers"
-if has_consent; then
-  e_pending "Creating Dock spacers"
-  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-  killall Dock
-fi
+get_consent "Do you want to set MacOS settings"
 
-get_consent "Autohide Dock"
 if has_consent; then
-  e_pending "Autohiding Dock"
-  defaults write com.apple.dock autohide -boolean true
-  killall Dock
-fi
+  get_consent "Create Dock spacers"
+  if has_consent; then
+    e_pending "Creating Dock spacers"
+    defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+    defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+    defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+    killall Dock
+  fi
 
-get_consent "Show Library folder"
-if has_consent; then
-  # Show Library folder
-  e_pending "Show Library folder"
-  chflags nohidden ~/Library
-fi
+  get_consent "Autohide Dock"
+  if has_consent; then
+    e_pending "Autohiding Dock"
+    defaults write com.apple.dock autohide -boolean true
+    killall Dock
+  fi
 
-get_consent "Display hidden Finder files/folders"
-if has_consent; then
-  e_pending "Displaying hidden Finder files/folders"
-  defaults write com.apple.finder AppleShowAllFiles -boolean true
-  killall Finder
-fi
+  get_consent "Show Library folder"
+  if has_consent; then
+    # Show Library folder
+    e_pending "Show Library folder"
+    chflags nohidden ~/Library
+  fi
 
-get_consent "Show status bar"
-if has_consent; then
-  # Show status bar
-  e_pending "Show status bar"
-  defaults write com.apple.finder ShowStatusBar -bool true
-fi
+  get_consent "Display hidden Finder files/folders"
+  if has_consent; then
+    e_pending "Displaying hidden Finder files/folders"
+    defaults write com.apple.finder AppleShowAllFiles -boolean true
+    killall Finder
+  fi
 
-get_consent "Prevent left and right swipe through history in Chrome"
-if has_consent; then
-  # Prevent left and right swipe through history in Chrome
-  e_pending "Prevent left and right swipe through history in Chrome"
-  defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+  get_consent "Show status bar"
+  if has_consent; then
+    # Show status bar
+    e_pending "Show status bar"
+    defaults write com.apple.finder ShowStatusBar -bool true
+  fi
+
+  get_consent "Prevent left and right swipe through history in Chrome"
+  if has_consent; then
+    # Prevent left and right swipe through history in Chrome
+    e_pending "Prevent left and right swipe through history in Chrome"
+    defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+  fi
 fi
 
 if ! has_path "Workspace"; then
   get_consent "Create ~/Workspace folder"
   if has_consent; then
     e_pending "Creating ~/Workspace folder"
-    mkdir -p Workspace/{___Space___,Development,Projects,Profile/{Avatar,Wallpaper,Refs}}
+    mkdir -p ${HOME}/Workspace/{___Space___,Development,Projects,Profile/{Avatar,Wallpaper,Refs}}
     test_path "Workspace"
     test_path "Workspace/___Space___"
     test_path "Workspace/Development"

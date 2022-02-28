@@ -15,10 +15,14 @@ if has_command "brew"; then
       test_command "zsh"
       e_pending "which zsh"
       which zsh
-      sudo sh -c "echo $(which zsh) >> /etc/shells"
-      chsh -s $(which zsh)
+      sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
+      # sudo sh -c "echo $(which zsh) >> /etc/shells"
+      chsh -s /usr/local/bin/zsh
+      # chsh -s $(which zsh)
       e_pending "showing shells"
       echo $SHELL
+      else
+
     fi
   fi
 fi
@@ -28,7 +32,8 @@ if has_command "zsh"; then
     get_consent "Install oh-my-zsh"
     if has_consent; then
       e_pending "Installing oh-my-zsh"
-      sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
       test_path ".oh-my-zsh"
       test_path ".zshrc"
 
