@@ -104,6 +104,7 @@ if ! has_command "brew"; then
   e_pending "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew doctor
+  brew update
   test_command "brew"
 fi
 
