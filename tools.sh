@@ -13,6 +13,7 @@ if has_command "brew"; then
       e_pending "Installing zsh"
       brew install zsh
       test_command "zsh"
+      source ~/.bash_profile
       e_pending "which zsh"
       which zsh
       sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
