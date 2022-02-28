@@ -33,6 +33,7 @@ if has_command "brew"; then
       e_pending "Installing zsh"
       brew install zsh
       test_command "zsh"
+      exec zsh
       # source ~/.bash_profile
     fi
   else
@@ -66,6 +67,7 @@ if has_command "zsh"; then
     if has_path ".zshrc"; then
       get_consent "Do yo wish to add path to .zshrc file"
       if has_consent; then
+        append_to_zshrc "# Add Homebrew's executable directory to the front of the PATH"
         append_to_zshrc "export PATH=/usr/local/bin:$PATH"
         append_to_zshrc "export EDITOR='code -n'"
         append_to_zshrc "export PAGER='less -f'"
