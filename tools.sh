@@ -6,6 +6,26 @@ source _utils.sh
 e_pending "Checking tools"
 # ------------------------------------------------------------------------------
 
+# if has_command "brew"; then
+#   if ! has_command "zsh"; then
+#     get_consent "Install zsh"
+#     if has_consent; then
+#       e_pending "Installing zsh"
+#       brew install zsh
+#       test_command "zsh"
+#       source ~/.bash_profile
+#       e_pending "which zsh"
+#       which zsh
+#       sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
+#       # sudo sh -c "echo $(which zsh) >> /etc/shells"
+#       chsh -s /usr/local/bin/zsh
+#       # chsh -s $(which zsh)
+#       e_pending "showing shells"
+#       echo $SHELL
+#     fi
+#   fi
+# fi
+
 if has_command "brew"; then
   if ! has_command "zsh"; then
     get_consent "Install zsh"
@@ -13,16 +33,23 @@ if has_command "brew"; then
       e_pending "Installing zsh"
       brew install zsh
       test_command "zsh"
-      source ~/.bash_profile
-      e_pending "which zsh"
-      which zsh
-      sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
-      # sudo sh -c "echo $(which zsh) >> /etc/shells"
-      chsh -s /usr/local/bin/zsh
-      # chsh -s $(which zsh)
-      e_pending "showing shells"
-      echo $SHELL
+      # source ~/.bash_profile
     fi
+  else
+    e_pending "which zsh"
+    which zsh
+    # $(which zsh)
+    if [[ $(which zsh) != /usr/local/bin/zsh ]]; then
+      # sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
+      # chsh -s /usr/local/bin/zsh
+      # e_pending "showing shells"
+      # echo $SHELL
+      sudo sh -c "echo $(which zsh) >> /etc/shells"
+      chsh -s $(which zsh)
+      echo 'This works'
+    fi
+    e_pending "which shell available"
+    echo $SHELL
   fi
 fi
 
@@ -31,18 +58,19 @@ if has_command "zsh"; then
     get_consent "Install oh-my-zsh"
     if has_consent; then
       e_pending "Installing oh-my-zsh"
-      # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
       test_path ".oh-my-zsh"
       test_path ".zshrc"
-
-      if has_path ".zshrc"; then
+    fi
+  else
+    if has_path ".zshrc"; then
+      get_consent "Do yo wish to add path to .zshrc file"
+      if has_consent; then
         append_to_zshrc "export PATH=/usr/local/bin:$PATH"
         append_to_zshrc "export EDITOR='code -n'"
         append_to_zshrc "export PAGER='less -f'"
         source ~/.zshrc
       fi
-
     fi
   fi
 fi
@@ -129,17 +157,17 @@ if has_command "brew" && has_command "zsh"; then
     fi
   fi
 
-  if ! has_brew "zsh-history-substring-search"; then
-    get_consent "Install zsh-history-substring-search"
-    if has_consent; then
-      e_pending "Installing zsh-history-substring-search"
-      brew install zsh-syntax-highlighting
-      append_to_zshrc "# zsh-syntax-highlighting for Zsh."
-      append_to_zshrc "source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-      source ~/.zshrc
-      test_brew "zsh-history-substring-search"
-    fi
-  fi
+  # if ! has_brew "zsh-history-substring-search"; then
+  #   get_consent "Install zsh-history-substring-search"
+  #   if has_consent; then
+  #     e_pending "Installing zsh-history-substring-search"
+  #     brew install zsh-syntax-highlighting
+  #     append_to_zshrc "# zsh-syntax-highlighting for Zsh."
+  #     append_to_zshrc "source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+  #     source ~/.zshrc
+  #     test_brew "zsh-history-substring-search"
+  #   fi
+  # fi
 
 fi
 

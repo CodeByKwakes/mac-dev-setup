@@ -11,7 +11,7 @@ if has_path ".oh-my-zsh"; then
   get_consent "Do you want to uninstall oh-my-zsh"
   if has_consent; then
     e_pending "Uninstalling oh-my-zsh"
-    uninstall_oh_my_zsh
+    $ZSH/tools/uninstall.sh
     test_path ".oh-my-zsh"
   fi
 fi
