@@ -22,8 +22,6 @@ if has_command "brew"; then
       # chsh -s $(which zsh)
       e_pending "showing shells"
       echo $SHELL
-      else
-
     fi
   fi
 fi
