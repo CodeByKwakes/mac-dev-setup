@@ -56,9 +56,10 @@ if has_command "brew"; then
     get_consent "Install nvm (Node via nvm)"
     if has_consent; then
       e_pending "Installing nvm"
-      curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
-      source ~/.bash_profile
-      source ~/.zshrc
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+      # curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+      # source ~/.bash_profile
+      # source ~/.zshrc
       test_command "nvm"
       e_pending "nvm version"
       nvm -v
