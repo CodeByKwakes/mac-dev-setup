@@ -167,10 +167,12 @@ brew install \
   fzf &&
 
 # GUI programs
-brew install --cask \
+brew install --cask --appdir="/Applications" \
   visual-studio-code \
   google-chrome \
+  google-chrome-canary \
   firefox \
+  firefox-developer-edition \
   rectangle \
   iterm2 \
   docker \
@@ -181,6 +183,42 @@ brew install --cask \
   postico \
   bear \
   todoist \
+  maccy \
+
+# Install Python
+brew install python
+brew install python3
+
+# Install Heroku
+brew tap heroku/brew && brew install heroku
+# heroku update
+
+brew install tree
+brew install yarn --without-node
+
+
+brew install --cask --appdir="/Applications" alfred
+brew install --cask --appdir="~/Applications" iterm2
+
+# Development tool casks
+brew install --cask --appdir="/Applications" visual-studio-code
+brew install --cask --appdir="/Applications" virtualbox
+brew install --cask --appdir="/Applications" vagrant
+brew install --cask --appdir="/Applications" macdown
+
+# Misc casks
+brew install --cask --appdir="/Applications" google-chrome
+brew install --cask --appdir="/Applications" google-chrome-canary
+brew install --cask --appdir="/Applications" firefox
+brew install --cask --appdir="/Applications" firefox-developer-edition
+brew install --cask --appdir="/Applications" postman
+brew install --cask --appdir="/Applications" docker
+brew install --cask --appdir="/Applications" slack
+brew install --cask --appdir="/Applications" rectangle
+brew install --cask --appdir="/Applications" gimp
+brew install --cask --appdir="/Applications" vlc
+# Maccy - Clipboard manager for macOS
+brew install --cask --appdir="/Applications" maccy
 ```
 
 ```sh
