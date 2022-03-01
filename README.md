@@ -21,6 +21,7 @@
   - [Install `nvm`](#install-nvm)
     - [Install Packages Globally](#install-packages-globally)
   - [Install Git](#install-git)
+    - [Zshrc Aliases](#zshrc-aliases)
 ### Defaults
 
 > _macOS Settings_
@@ -343,7 +344,8 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 Add following to `.zshrc` to make Atom the default text editor:
 
 ``` sh
-export EDITOR='atom -n'
+# Make Code default editor
+export EDITOR='code -n'
 export PAGER='less -f'
 ```
 
@@ -561,4 +563,32 @@ tags
 #######
 *.pyc
 __pycache__/
+```
+
+
+### Zshrc Aliases
+```sh
+# Example aliases
+alias zshconfig="code ~/.zshrc"
+alias zshsource="source ~/.zshrc"
+alias ohmyzsh="code ~/.oh-my-zsh"
+alias opengitconfig="code ~/.gitconfig"
+alias brewup='brew update && brew upgrade && brew doctor && brew cleanup'
+alias dev='cd ~/Workspace/Development'
+alias proj='cd ~/Workspace/Projects'
+# alias dev='cd /Users/kwakes/Development'
+alias brewserviceslist="brew services list"
+alias mongod-start="brew services run mongodb-community"
+alias mongod-stop="brew services stop mongodb-community"
+alias postgresql-start="brew services start postgresql"
+alias postgresql-stop="brew services stop postgresql"
+alias angularclilatest='npm uninstall -g @angular/cli; npm cache verify; npm install -g @angular/cli@latest'
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also, clear Apple’s System Logs to improve shell startup speed.
+# Finally, clear download history from quarantine. https://mths.be/bum
+alias emptytrash="rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash; rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
 ```
